@@ -1,0 +1,54 @@
+{% load static %}
+<html>
+<head>
+<title>E - Commerce Portal for Agriculture</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+<script>
+    function AddToCart(product_id) {
+        // Perform an AJAX request to add the product to the cart
+        fetch("{% url 'AddToCart' 0 %}".replace('0', product_id))
+        .then(response => {
+            if (response.ok) {
+                // If the response is successful, display the success message
+                alert("Added to cart successfully.");
+            } else {
+                // If the response is not successful, display an error message
+                alert("Failed to add to cart.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Failed to add to cart.");
+        });
+    }
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="main_resize">
+    <div class="header">
+      <div class="logo">
+        <h1 style="font-family: Lucida Bright, serif; font-size: 34px;"><span>E - Commerce Portal for Agriculture</span><small></small></h1>
+      </div>
+    </div>
+    <div class="content">
+      <div class="content_bg">
+        <div class="menu_nav">
+           <ul>
+               <li><a href="{% url 'ViewFruitDetails' %}">View Products </a></li>
+               <li><a href="{% url 'cartitems' %}">Cart Items</a></li>
+               <li><a href="{% url 'index' %}">Logout</a></li>
+           </ul>
+        </div>
+        <div class="hbg"><img src="{% static 'images/a2.jpg' %}" width="915" height="286" alt="" /></div>
+        <center>
+           <h2 style="color: black;"><b> Product Details </b></h2>
+           {{ data|safe }}
+        </center>
+        
+    </div>
+  </div>
+</div>
+</body>
+</html>
